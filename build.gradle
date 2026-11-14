@@ -1,0 +1,48 @@
+plugins {
+	id 'java'
+}
+
+repositories {
+	mavenLocal()
+	maven {
+		url = 'https://repo.runelite.net'
+	}
+	mavenCentral()
+}
+
+def runeLiteVersion = 'latest.release'
+
+dependencies {
+	compileOnly "net.runelite:client:$runeLiteVersion"
+
+	compileOnly 'org.projectlombok:lombok:1.18.30'
+	annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+	testImplementation 'junit:junit:4.13.1'
+	testImplementation "net.runelite:client:$runeLiteVersion"
+	testImplementation "net.runelite:jshell:$runeLiteVersion"
+}
+
+group = 'com.simpledefence'
+version = '0.1.0-beta'
+
+tasks.withType(JavaCompile).configureEach {
+	options.encoding = 'UTF-8'
+	options.release.set(11)
+}
+
+tasks.withType(JavaExec).configureEach {
+	jvmArgs '-ea'
+}
+tasks.register('runSimpleDefenceTracker', JavaExec) {
+	group = 'runelite'
+	description = 'Launch RuneLite with this plugin loaded'
+	classpath = sourceSets.test.runtimeClasspath
+	mainClass = 'com.simpledefence.SimpleDefencePluginTest'
+}
+
+// Optional local-only build scripts (not part of the repository)
+if (file('local/local.gradle').exists())
+{
+	apply from: 'local/local.gradle'
+}

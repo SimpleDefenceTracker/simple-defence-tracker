@@ -1,0 +1,12 @@
+# Build output and IDE files (contain local paths - never commit)
+build/
+.gradle/
+.idea/
+out/
+*.iml
+
+# RuneLite login file, just in case
+credentials.properties
+
+# Local-only files
+local/
