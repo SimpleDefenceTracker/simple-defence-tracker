@@ -81,6 +81,11 @@ class SpecsPanelOverlay extends OverlayPanel
 	@Override
 	public Dimension render(Graphics2D graphics)
 	{
+		if (!config.showSpecsPanel())
+		{
+			return null;
+		}
+
 		Map<Integer, NpcDefenceState> tracked = plugin.getTracked();
 		if (tracked.isEmpty() && plugin.getHeldDrains().isEmpty())
 		{

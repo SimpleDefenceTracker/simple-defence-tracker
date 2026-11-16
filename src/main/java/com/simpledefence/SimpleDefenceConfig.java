@@ -22,6 +22,28 @@ public interface SimpleDefenceConfig extends Config
 		return true;
 	}
 
+	@ConfigItem(
+		keyName = "showSpecsPanel",
+		name = "Show panel",
+		description = "Show the Simple Defence Tracker panel (specs needed to drain each NPC)",
+		position = 1
+	)
+	default boolean showSpecsPanel()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "showHeadStats",
+		name = "Show stats above NPCs",
+		description = "Show the drained stats above each NPC's head",
+		position = 2
+	)
+	default boolean showHeadStats()
+	{
+		return true;
+	}
+
 	@Range(min = 0, max = 200)
 	@ConfigItem(
 		keyName = "heightOffset",
@@ -250,5 +272,62 @@ public interface SimpleDefenceConfig extends Config
 	default boolean showSeercull()
 	{
 		return false;
+	}
+
+	@ConfigSection(
+		name = "NPC highlight",
+		description = "Highlight drained NPCs in their Defence colour (red = undrained, green = fully drained)",
+		position = 30
+	)
+	String highlightSection = "highlightSection";
+
+	@ConfigItem(
+		keyName = "highlightNpc",
+		name = "Highlight drained NPCs",
+		description = "Mark NPCs whose Defence has been drained, coloured red (undrained) to green (fully drained)",
+		section = highlightSection,
+		position = 31
+	)
+	default boolean highlightNpc()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		keyName = "highlightStyle",
+		name = "Style",
+		description = "Hull, tile, true tile (server position) or outline",
+		section = highlightSection,
+		position = 32
+	)
+	default HighlightStyle highlightStyle()
+	{
+		return HighlightStyle.HULL;
+	}
+
+	@Range(min = 1, max = 5)
+	@ConfigItem(
+		keyName = "highlightWidth",
+		name = "Border width",
+		description = "Width of the highlight border",
+		section = highlightSection,
+		position = 33
+	)
+	default int highlightWidth()
+	{
+		return 2;
+	}
+
+	@Range(min = 0, max = 255)
+	@ConfigItem(
+		keyName = "highlightFillOpacity",
+		name = "Fill opacity",
+		description = "Opacity of the fill inside the hull or tile (0 = border only). Not used by Outline",
+		section = highlightSection,
+		position = 34
+	)
+	default int highlightFillOpacity()
+	{
+		return 30;
 	}
 }

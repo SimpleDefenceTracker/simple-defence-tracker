@@ -96,6 +96,7 @@ public class SimpleDefencePlugin extends Plugin
 	@Inject private OverlayManager overlayManager;
 	@Inject private SimpleDefenceOverlay overlay;
 	@Inject private SpecsPanelOverlay specsPanel;
+	@Inject private SimpleDefenceHighlightOverlay highlightOverlay;
 	@Inject private SimpleDefenceConfig config;
 	@Inject private PartyService partyService;
 	@Inject private WSClient wsClient;
@@ -172,6 +173,7 @@ public class SimpleDefencePlugin extends Plugin
 	{
 		overlayManager.add(overlay);
 		overlayManager.add(specsPanel);
+		overlayManager.add(highlightOverlay);
 		wsClient.registerMessage(DefenceSyncMessage.class);
 		lastSpecEnergy = -1;
 		lastHpXp = -1;
@@ -182,6 +184,7 @@ public class SimpleDefencePlugin extends Plugin
 	{
 		overlayManager.remove(overlay);
 		overlayManager.remove(specsPanel);
+		overlayManager.remove(highlightOverlay);
 		wsClient.unregisterMessage(DefenceSyncMessage.class);
 		tracked.clear();
 		heldDrains.clear();

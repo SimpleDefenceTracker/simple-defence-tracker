@@ -86,6 +86,11 @@ class SimpleDefenceOverlay extends Overlay
 	@Override
 	public Dimension render(Graphics2D graphics)
 	{
+		if (!config.showHeadStats())
+		{
+			return null;
+		}
+
 		Map<Integer, NpcDefenceState> tracked = plugin.getTracked();
 		if (tracked.isEmpty())
 		{
@@ -216,7 +221,7 @@ class SimpleDefenceOverlay extends Overlay
 	/**
 	 * Red at full defence, fading through orange and yellow to green once fully drained.
 	 */
-	private static Color gradient(int remaining, int total)
+	static Color gradient(int remaining, int total)
 	{
 		if (total <= 0 || remaining <= 0)
 		{
